@@ -11,4 +11,8 @@ public class FileStorageConfig {
     public String getUploadDirectory() {
         return uploadDirectory;
     }
+
+    public void setUploadDirectory(String uploadDirectory) {
+        this.uploadDirectory = uploadDirectory;
+    }
 }
