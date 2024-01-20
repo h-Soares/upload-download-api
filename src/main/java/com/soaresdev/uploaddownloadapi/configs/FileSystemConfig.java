@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConfigurationProperties(prefix = "file")
-public class FileStorageConfig {
+public class FileSystemConfig {
     private String uploadDirectory;
 
     public String getUploadDirectory() {
