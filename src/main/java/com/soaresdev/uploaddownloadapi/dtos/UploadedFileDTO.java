@@ -10,12 +10,12 @@ public class UploadedFileDTO implements Serializable {
     private String fileName;
     private String fileDownloadUri;
     private String fileType;
-    private long fileSize;
+    private String fileSize;
 
     public UploadedFileDTO() {
     }
 
-    public UploadedFileDTO(String fileName, String fileDownloadUri, String fileType, long fileSize) {
+    public UploadedFileDTO(String fileName, String fileDownloadUri, String fileType, String fileSize) {
         this.fileName = fileName;
         this.fileDownloadUri = fileDownloadUri;
         this.fileType = fileType;
@@ -46,11 +46,11 @@ public class UploadedFileDTO implements Serializable {
         this.fileType = fileType;
     }
 
-    public long getFileSize() {
+    public String getFileSize() {
         return fileSize;
     }
 
-    public void setFileSize(long fileSize) {
+    public void setFileSize(String fileSize) {
         this.fileSize = fileSize;
     }
 }
