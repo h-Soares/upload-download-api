@@ -44,7 +44,7 @@ public class FileSystemService {
                     .path(fileName)
                     .toUriString();
 
-            Files.copy(file.getInputStream(), targetLocation);
+            file.transferTo(targetLocation);
             return new UploadedFileDTO(fileName, downloadUri, file.getContentType(), file.getSize());
         }catch(Exception e) {
             throw new FileUploadException("Could not upload file " + fileName + " because " + e.getMessage());
