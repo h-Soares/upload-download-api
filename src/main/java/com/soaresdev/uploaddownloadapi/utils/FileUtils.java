@@ -5,7 +5,7 @@ import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 
 public class FileUtils {
-    private static final String REGEX_FILE_NAME = "^[a-zA-Z0-9](?:[a-zA-Z0-9._-]*[a-zA-Z0-9])?\\.[a-zA-Z0-9_-]+$";
+    private static final String REGEX_FILE_NAME = "^[a-zA-Z0-9](?:[a-zA-Z0-9. _-]*[a-zA-Z0-9])?\\.[a-zA-Z0-9_-]+$";
 
     private FileUtils() {
     }
