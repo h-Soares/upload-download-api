@@ -24,6 +24,11 @@ public class ControllersExceptionHandler {
         return ResponseEntity.badRequest().body(getStandardError(HttpStatus.BAD_REQUEST, e, request));
     }
 
+    @ExceptionHandler(FileDownloadException.class)
+    public ResponseEntity<StandardError> fileDownload(FileDownloadException e, HttpServletRequest request) {
+        return ResponseEntity.badRequest().body(getStandardError(HttpStatus.BAD_REQUEST, e, request));
+    }
+
     private StandardError getStandardError(HttpStatus hs, Exception e, HttpServletRequest request) {
         StandardError standardError = new StandardError();
         standardError.setTimestamp(Instant.now());
