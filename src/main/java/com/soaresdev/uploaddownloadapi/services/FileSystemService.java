@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Service
 public class FileSystemService {
@@ -45,5 +46,9 @@ public class FileSystemService {
         }catch(Exception e) {
             throw new FileUploadException("Could not upload file " + fileName + " because " + e.getMessage());
         }
+    }
+
+    public List<UploadedFileDTO> uploadFiles(List<MultipartFile> files) {
+        return files.stream().map(this::uploadFile).toList();
     }
 }

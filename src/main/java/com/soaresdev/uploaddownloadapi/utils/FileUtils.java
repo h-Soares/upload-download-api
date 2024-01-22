@@ -15,11 +15,13 @@ public class FileUtils {
     }
 
     public static String getFileDownloadUri(String fileName) {
-        return ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/download")
-                .path("/{fileName}")
-                .buildAndExpand(fileName)
-                .toUriString().replace("/upload", "");
+        return ServletUriComponentsBuilder.fromCurrentRequest().
+                path("/download").
+                path("/{fileName}").
+                buildAndExpand(fileName).
+                toUriString().
+                replace("/uploads", "").
+                replace("/upload", "");
     }
 
     public static String humanReadableByteCountSI(long bytes) {
