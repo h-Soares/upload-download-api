@@ -17,6 +17,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -71,6 +72,23 @@ public class FileSystemService {
             return downloadedFile;
         }catch(MalformedURLException e) {
             throw new FileDownloadException("Fatal error. Could not download file: " + fileName);
+        }
+    }
+
+    public List<UploadedFileDTO> listAllFiles() {
+        try {
+            List<Path> pathFilesList = Files.list(fileUploadLocation).toList();
+
+            List<UploadedFileDTO> fileList = new ArrayList<>();
+            for(Path pathFile : pathFilesList) {
+                fileList.add(new UploadedFileDTO(pathFile.getFileName().toString(),
+                        FileUtils.getFileDownloadUri(pathFile.getFileName().toString()),
+                        Files.probeContentType(pathFile),
+                        FileUtils.humanReadableByteCountSI(Files.size(pathFile))));
+            }
+            return fileList;
+        }catch(Exception e) {
+            throw new FileInternalErrorException("Fatal error. Could not list all files");
         }
     }
 }

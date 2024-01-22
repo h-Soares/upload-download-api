@@ -77,4 +77,14 @@ public class FileSystemController {
             throw new FileDownloadException("Could not determine file type of file: " + fileName);
         }
     }
+
+    @Operation(description = "List all files from file system", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "500", description = "Internal file system error", content = @Content(schema = @Schema(implementation = StandardError.class)))
+    })
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<UploadedFileDTO>> listAllFiles() {
+        return ResponseEntity.ok(fileSystemService.listAllFiles());
+    }
 }
