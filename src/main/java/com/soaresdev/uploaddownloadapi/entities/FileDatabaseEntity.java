@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tb_file")
-public class FileDatabase implements Serializable {
+public class FileDatabaseEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -22,21 +22,29 @@ public class FileDatabase implements Serializable {
     @Column(nullable = false)
     private String fileType;
     @Column(nullable = false)
-    private String fileSize;
+    private long fileByteSize;
 
     @Lob
     @Column(columnDefinition = "BLOB")
     private byte[] binaryData;
 
-    public FileDatabase() {
+    public FileDatabaseEntity() {
     }
 
-    public FileDatabase(UUID id, String fileName, String fileDownloadUri, String fileType, String fileSize, byte[] binaryData) {
+    public FileDatabaseEntity(UUID id, String fileName, String fileDownloadUri, String fileType, long fileByteSize, byte[] binaryData) {
         this.id = id;
         this.fileName = fileName;
         this.fileDownloadUri = fileDownloadUri;
         this.fileType = fileType;
-        this.fileSize = fileSize;
+        this.fileByteSize = fileByteSize;
+        this.binaryData = binaryData;
+    }
+
+    public FileDatabaseEntity(String fileName, String fileDownloadUri, String fileType, long fileByteSize, byte[] binaryData) {
+        this.fileName = fileName;
+        this.fileDownloadUri = fileDownloadUri;
+        this.fileType = fileType;
+        this.fileByteSize = fileByteSize;
         this.binaryData = binaryData;
     }
 
@@ -72,12 +80,12 @@ public class FileDatabase implements Serializable {
         this.fileType = fileType;
     }
 
-    public String getFileSize() {
-        return fileSize;
+    public long getFileByteSize() {
+        return fileByteSize;
     }
 
-    public void setFileSize(String fileSize) {
-        this.fileSize = fileSize;
+    public void setFileByteSize(long fileSize) {
+        this.fileByteSize = fileSize;
     }
 
     public byte[] getBinaryData() {
@@ -92,7 +100,7 @@ public class FileDatabase implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FileDatabase that = (FileDatabase) o;
+        FileDatabaseEntity that = (FileDatabaseEntity) o;
         return Objects.equals(fileName, that.fileName);
     }
 

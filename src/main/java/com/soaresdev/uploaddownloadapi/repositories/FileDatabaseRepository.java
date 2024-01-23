@@ -1,12 +1,14 @@
 package com.soaresdev.uploaddownloadapi.repositories;
 
-import com.soaresdev.uploaddownloadapi.entities.FileDatabase;
+import com.soaresdev.uploaddownloadapi.entities.FileDatabaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface FileDatabaseRepository extends JpaRepository<FileDatabase, UUID> {
-    Optional<FileDatabase> findFileDatabaseByFileName(String fileName);
+public interface FileDatabaseRepository extends JpaRepository<FileDatabaseEntity, UUID> {
+    Optional<FileDatabaseEntity> findFileDatabaseByFileName(String fileName);
+
+    boolean existsByFileName(String fileName);
 }
