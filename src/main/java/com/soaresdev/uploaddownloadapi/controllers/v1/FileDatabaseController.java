@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/in-database/files")
 @Tag(name = "Database system", description = "Allows manipulate files on database")
@@ -35,5 +37,15 @@ public class FileDatabaseController {
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UploadedFileDTO> uploadFile(@RequestParam("file") MultipartFile file) {
         return ResponseEntity.ok(fileDatabaseService.uploadFile(file));
+    }
+
+    @Operation(description = "Upload files into database", method = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = UploadedFileDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Error in files upload", content = @Content(schema = @Schema(implementation = StandardError.class))),
+    })
+    @PostMapping(value = "/uploads", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<UploadedFileDTO>> uploadFiles(@RequestParam("files") List<MultipartFile> files) {
+        return ResponseEntity.ok(fileDatabaseService.uploadFiles(files));
     }
 }
