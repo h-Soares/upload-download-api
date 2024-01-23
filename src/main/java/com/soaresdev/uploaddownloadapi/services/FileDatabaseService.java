@@ -2,6 +2,8 @@ package com.soaresdev.uploaddownloadapi.services;
 
 import com.soaresdev.uploaddownloadapi.dtos.UploadedFileDTO;
 import com.soaresdev.uploaddownloadapi.entities.FileDatabaseEntity;
+import com.soaresdev.uploaddownloadapi.exceptions.FileDownloadException;
+import com.soaresdev.uploaddownloadapi.exceptions.FileNotFoundException;
 import com.soaresdev.uploaddownloadapi.exceptions.FileUploadException;
 import com.soaresdev.uploaddownloadapi.repositories.FileDatabaseRepository;
 import com.soaresdev.uploaddownloadapi.utils.FileUtils;
@@ -30,17 +32,15 @@ public class FileDatabaseService {
         if(fileDatabaseRepository.existsByFileName(fileName))
             throw new FileUploadException("File already exists: " + fileName);
 
-        String downloadUri = FileUtils.getFileDownloadUri(fileName);
         try {
             FileDatabaseEntity toUploadFile = new FileDatabaseEntity(fileName,
-                    downloadUri,
                     file.getContentType(),
                     file.getSize(),
                     file.getBytes());
 
             fileDatabaseRepository.save(toUploadFile);
             return new UploadedFileDTO(fileName,
-                    downloadUri,
+                    FileUtils.getFileDownloadUri(fileName),
                     file.getContentType(),
                     FileUtils.humanReadableByteCountSI(file.getSize()));
         }catch(IOException e) {
@@ -53,4 +53,14 @@ public class FileDatabaseService {
         return files.stream().map(this::uploadFile).toList();
     }
 
+    @Transactional
+    public FileDatabaseEntity downloadFile(String fileName) {
+        if(!FileUtils.isValidFileName(fileName))
+            throw new FileDownloadException("Invalid file name: " + fileName);
+
+        FileDatabaseEntity downloadedFile = fileDatabaseRepository.findByFileName(fileName).
+                orElseThrow(() -> new FileNotFoundException("File not found: " + fileName));
+
+        return downloadedFile;
+    }
 }

@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Repository
 public interface FileDatabaseRepository extends JpaRepository<FileDatabaseEntity, UUID> {
-    Optional<FileDatabaseEntity> findFileDatabaseByFileName(String fileName);
+    Optional<FileDatabaseEntity> findByFileName(String fileName);
 
     boolean existsByFileName(String fileName);
 }

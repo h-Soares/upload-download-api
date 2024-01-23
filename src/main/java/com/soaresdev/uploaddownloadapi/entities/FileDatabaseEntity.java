@@ -18,8 +18,6 @@ public class FileDatabaseEntity implements Serializable {
     @Column(nullable = false, unique = true)
     private String fileName;
     @Column(nullable = false)
-    private String fileDownloadUri;
-    @Column(nullable = false)
     private String fileType;
     @Column(nullable = false)
     private long fileByteSize;
@@ -31,18 +29,16 @@ public class FileDatabaseEntity implements Serializable {
     public FileDatabaseEntity() {
     }
 
-    public FileDatabaseEntity(UUID id, String fileName, String fileDownloadUri, String fileType, long fileByteSize, byte[] binaryData) {
+    public FileDatabaseEntity(UUID id, String fileName, String fileType, long fileByteSize, byte[] binaryData) {
         this.id = id;
         this.fileName = fileName;
-        this.fileDownloadUri = fileDownloadUri;
         this.fileType = fileType;
         this.fileByteSize = fileByteSize;
         this.binaryData = binaryData;
     }
 
-    public FileDatabaseEntity(String fileName, String fileDownloadUri, String fileType, long fileByteSize, byte[] binaryData) {
+    public FileDatabaseEntity(String fileName, String fileType, long fileByteSize, byte[] binaryData) {
         this.fileName = fileName;
-        this.fileDownloadUri = fileDownloadUri;
         this.fileType = fileType;
         this.fileByteSize = fileByteSize;
         this.binaryData = binaryData;
@@ -62,14 +58,6 @@ public class FileDatabaseEntity implements Serializable {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
-    }
-
-    public String getFileDownloadUri() {
-        return fileDownloadUri;
-    }
-
-    public void setFileDownloadUri(String fileDownloadUri) {
-        this.fileDownloadUri = fileDownloadUri;
     }
 
     public String getFileType() {
