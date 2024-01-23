@@ -65,4 +65,13 @@ public class FileDatabaseController {
                         "attachment; filename=" + downloadedFile.getFileName()).
                 body(new ByteArrayResource(downloadedFile.getBinaryData()));
     }
+
+    @Operation(description = "List all files from file database", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK")
+    })
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<UploadedFileDTO>> listAllFiles() {
+        return ResponseEntity.ok(fileDatabaseService.listAllFiles());
+    }
 }

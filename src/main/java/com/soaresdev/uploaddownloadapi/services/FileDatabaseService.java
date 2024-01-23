@@ -63,4 +63,13 @@ public class FileDatabaseService {
 
         return downloadedFile;
     }
+
+    public List<UploadedFileDTO> listAllFiles() {
+        return fileDatabaseRepository.findAll().stream().map(file ->
+                new UploadedFileDTO(file.getFileName(),
+                        FileUtils.getFileDownloadUri(file.getFileName()),
+                        file.getFileType(),
+                        FileUtils.humanReadableByteCountSI(file.getFileByteSize()))).
+                toList();
+    }
 }
