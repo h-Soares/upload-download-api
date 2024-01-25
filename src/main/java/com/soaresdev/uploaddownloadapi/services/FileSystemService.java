@@ -48,7 +48,7 @@ public class FileSystemService {
             file.transferTo(targetLocation);
             return new UploadedFileDTO(fileName, downloadUri, file.getContentType(), FileUtils.humanReadableByteCountSI(file.getSize()));
         }catch(IOException e) {
-            throw new FileUploadException("Fatal error. Could not upload file: " + fileName);
+            throw new FileInternalErrorException("Fatal error. Could not upload file: " + fileName);
         }
     }
 
