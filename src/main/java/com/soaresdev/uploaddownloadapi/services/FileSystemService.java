@@ -37,14 +37,11 @@ public class FileSystemService {
 
     public UploadedFileDTO uploadFile(MultipartFile file) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
-        if(fileName == null || !FileUtils.isValidFileName(fileName))
-            throw new FileUploadException("Invalid file name: " + fileName);
+        verifyFileName(fileName);
 
         try {
             Path targetLocation = fileUploadLocation.resolve(fileName);
-            if(Files.exists(targetLocation))
-                throw new FileUploadException("File already exists: " + fileName);
+            verifyIfFileExists(targetLocation);
 
             String downloadUri = FileUtils.getFileDownloadUri(fileName);
 
@@ -56,6 +53,14 @@ public class FileSystemService {
     }
 
     public List<UploadedFileDTO> uploadFiles(List<MultipartFile> files) {
+        //this "for" is used as a @Transactional for upload files in system
+        for(MultipartFile file : files) {
+            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+            verifyFileName(fileName);
+
+            Path targetLocation = fileUploadLocation.resolve(fileName);
+            verifyIfFileExists(targetLocation);
+        }
         return files.stream().map(this::uploadFile).toList();
     }
 
@@ -90,5 +95,15 @@ public class FileSystemService {
         }catch(Exception e) {
             throw new FileInternalErrorException("Fatal error. Could not list all files");
         }
+    }
+
+    private static void verifyFileName(String fileName) {
+        if(fileName == null || !FileUtils.isValidFileName(fileName))
+            throw new FileUploadException("Invalid file name: " + fileName);
+    }
+
+    private static void verifyIfFileExists(Path targetLocation) {
+        if(Files.exists(targetLocation))
+            throw new FileUploadException("File already exists: " + targetLocation.getFileName());
     }
 }
