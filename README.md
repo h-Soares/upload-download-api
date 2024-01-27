@@ -3,8 +3,6 @@
 ## 📌 Versão
 1.0.0
 
----
-
 ## 👨‍💻 Autor
 * <div style="display: flex; align-items: center;">
     <p style="margin: 0; font-size: 18px;">Hiago Soares | </p>
@@ -13,12 +11,8 @@
     </a>
 </div>
 
----
-
 ## 🔎 Sobre o projeto
 O projeto consiste de uma API que possibilita ao usuário fazer upload ou download de arquivos, tanto em diretório local quanto em banco de dados devidamente configurado.
-
----
 
 ## 🛠️ Tecnologias utilizadas
 * Maven 3.9.0
@@ -29,8 +23,6 @@ O projeto consiste de uma API que possibilita ao usuário fazer upload ou downlo
 * Banco de dados H2
 * JUnit 5
 * Swagger (OpenAPI) 2.3.0
-
----
 
 ## 🔧 Instalação
 
@@ -60,22 +52,16 @@ mvn spring-boot:run
 ```
 A porta utilizada é a padrão: 8080.
 
----
-
 ## 🧪 Testes
 Para executar todos os testes:
 ```bash
 mvn test
 ```
 
----
-
 ## 📖 Documentação com Swagger (OpenAPI)
 Com o projeto instalado, para acessar a documentação, vá até:
 
 `http://localhost:8080/swagger-ui/index.html`
-
----
 
 ## ⚙️ Utilização da API
 
