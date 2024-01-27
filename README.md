@@ -44,7 +44,7 @@ cd upload-download-api
 ```bash
 mvn clean install
 ```
-O comando irá baixar todas as dependências do projeto e criar um diretório target com os artefatos construídos, que incluem o arquivo jar do projeto. Além disso, serão executados os testes unitários, e se algum falhar, o Maven exibirá essa informação no console.
+O comando irá baixar todas as dependências do projeto e criar um diretório target com os artefatos construídos, que incluem o arquivo jar do projeto. Além disso, serão executados todos os testes, e, se algum falhar, o Maven exibirá essa informação no console.
 
 5. Executar a aplicação:
 ```bash
