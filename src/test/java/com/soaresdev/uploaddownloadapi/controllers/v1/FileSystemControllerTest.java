@@ -6,8 +6,10 @@ import com.soaresdev.uploaddownloadapi.exceptions.FileInternalErrorException;
 import com.soaresdev.uploaddownloadapi.exceptions.FileNotFoundException;
 import com.soaresdev.uploaddownloadapi.exceptions.FileUploadException;
 import com.soaresdev.uploaddownloadapi.utils.FileUtils;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.FileSystemUtils;
 import java.io.IOException;
@@ -33,6 +36,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestPropertySource(properties = "file.upload-directory=testing")
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class FileSystemControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -59,6 +64,11 @@ class FileSystemControllerTest {
         uploadDirectory = Paths.get(fileSystemConfig.getUploadDirectory()).toAbsolutePath().normalize();
         cleanup();
         init();
+    }
+
+    @AfterAll
+    void after() throws Exception {
+        deleteUploadDirectory();
     }
 
     @Test
