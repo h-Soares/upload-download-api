@@ -52,6 +52,20 @@ mvn spring-boot:run
 ```
 A porta utilizada é a padrão: 8080.
 
+## 🐳 Docker
+Para utilizar a aplicação via Docker, siga os passos:
+1. Baixar a imagem:
+```bash
+docker pull hsoaress/upload-download-api-img
+```
+
+2. Inicializar o contêiner:
+
+(a aplicação roda na porta 8080)
+```bash
+docker run -d -p SUA_PORTA:8080 hsoaress/upload-download-api-img
+```
+
 ## 🧪 Testes
 Para executar todos os testes:
 ```bash
