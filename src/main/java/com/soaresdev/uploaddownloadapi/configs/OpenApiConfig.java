@@ -14,13 +14,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 description = "Documentation for upload and download files API.\n\nOperations can be performed in the system or in a database",
                 title = "Upload and download files API",
                 version = "1.0"
-        ),
-        servers = {
-                @Server(
-                        description = "Localhost server",
-                        url = "http://localhost:8080/"
-                )
-        }
+        )
 )
 public class OpenApiConfig {
 }
