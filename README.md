@@ -1,5 +1,7 @@
 # API de Upload e Download de arquivos 
 
+[![Continuous Integration with GitHub Action](https://github.com/h-Soares/upload-download-api/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/h-Soares/upload-download-api/actions/workflows/continuous-integration.yml)
+
 ## 📌 Versão
 1.0.0
 
