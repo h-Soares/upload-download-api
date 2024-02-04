@@ -1,6 +1,7 @@
 # API de Upload e Download de arquivos 
 
 [![Continuous Integration with GitHub Action](https://github.com/h-Soares/upload-download-api/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/h-Soares/upload-download-api/actions/workflows/continuous-integration.yml)
+[![Docker Hub Repo](https://img.shields.io/docker/pulls/hsoaress/upload-download-api-img.svg)](https://hub.docker.com/repository/docker/hsoaress/upload-download-api-img)
 
 ## 📌 Versão
 1.0.0
