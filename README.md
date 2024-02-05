@@ -26,6 +26,7 @@ O projeto consiste de uma API que possibilita ao usuário fazer upload ou downlo
 * Banco de dados H2
 * JUnit 5
 * Swagger (OpenAPI) 2.3.0
+* Docker
 
 ## 🔧 Instalação
 
